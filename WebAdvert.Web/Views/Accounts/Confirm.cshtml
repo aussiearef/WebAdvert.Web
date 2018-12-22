@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebAdvert.Web.Models.Accounts.ConfirmModel
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-controller="Accounts" asp-action="Confirm">
+            <div asp-validation-summary="All" class="text-danger" />
+
+            <div class="form-group">
+                <label asp-for="Email" ></label>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Code"> </label>
+                <input asp-for="Code" class="form-control"/>
+                <span asp-validation-for="Code" class="text-danger" />
+            </div>
+
+            <button type="submit">Confirm</button>
+        </form>
+    </div>
+</div>
+
+
