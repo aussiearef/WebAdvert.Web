@@ -7,14 +7,14 @@ using WebAdvert.Web.Models.Accounts;
 
 namespace WebAdvert.Web.Controllers
 {
-    public class Accounts : Controller
+    public class AccountsController : Controller
     {
         private readonly CognitoUserPool _pool;
 
         private readonly SignInManager<CognitoUser> _signInManager;
         private readonly UserManager<CognitoUser> _userManager;
 
-        public Accounts(SignInManager<CognitoUser> signInManager, UserManager<CognitoUser> userManager,
+        public AccountsController(SignInManager<CognitoUser> signInManager, UserManager<CognitoUser> userManager,
             CognitoUserPool pool)
         {
             _signInManager = signInManager;

@@ -10,11 +10,11 @@ using WebAdvert.Web.Services;
 
 namespace WebAdvert.Web.Controllers
 {
-    public class AdvertManagement : Controller
+    public class AdvertManagementController : Controller
     {
         private readonly IFileUploader _fileUploader;
 
-        public AdvertManagement(IFileUploader fileUploader)
+        public AdvertManagementController(IFileUploader fileUploader)
         {
             _fileUploader = fileUploader;
         }

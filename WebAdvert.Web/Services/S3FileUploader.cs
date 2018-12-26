@@ -39,8 +39,6 @@ namespace WebAdvert.Web.Services
                 var response = await client.PutObjectAsync(request).ConfigureAwait(false);
                 return response.HttpStatusCode == HttpStatusCode.OK;
             }
-
-            return true;
         }
     }
 }
