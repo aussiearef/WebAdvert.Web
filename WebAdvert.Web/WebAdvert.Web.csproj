@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\AdvertManagement\AdvertManagement.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="0.9.0" />
     <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="1.0.0" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.31.5" />
   </ItemGroup>
 
 

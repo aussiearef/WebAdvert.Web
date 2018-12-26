@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebAdvert.Web.Models.Accounts
 {
@@ -7,18 +6,18 @@ namespace WebAdvert.Web.Models.Accounts
     {
         [Required]
         [EmailAddress]
-        [Display(Name ="Email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(6,ErrorMessage ="Password must be at least six characaters long!")]
-        [Display(Name ="Password")]
+        [StringLength(6, ErrorMessage = "Password must be at least six characaters long!")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Compare("Password",ErrorMessage ="Password and its confirmation do not match")]
+        [Compare("Password", ErrorMessage = "Password and its confirmation do not match")]
         public string ConfirmPassword { get; set; }
     }
 }
