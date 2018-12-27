@@ -49,9 +49,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AdvertApi.Models" Version="1.0.2" />
     <PackageReference Include="Amazon.AspNetCore.Identity.Cognito" Version="0.9.0" />
     <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="1.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.5" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0-preview.18572.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

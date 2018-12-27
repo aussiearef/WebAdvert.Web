@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebAdvert.Web.ServiceClients;
 using WebAdvert.Web.Services;
+using AutoMapper;
 
 namespace WebAdvert.Web
 {
@@ -31,6 +33,8 @@ namespace WebAdvert.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
             services.AddCognitoIdentity(config=> {
                 config.Password = new Microsoft.AspNetCore.Identity.PasswordOptions
                 {
@@ -47,9 +51,9 @@ namespace WebAdvert.Web
                 options.LoginPath = "/Accounts/Login";
             });
 
+            services.AddAutoMapper();
             services.AddTransient<IFileUploader, S3FileUploader>();
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddHttpClient<IAdvertApiClient, AdvertApiClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
