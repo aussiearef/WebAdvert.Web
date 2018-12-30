@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AdvertApi.Models;
@@ -28,13 +29,23 @@ namespace WebAdvert.Web.ServiceClients
             var advertApiModel = _mapper.Map<AdvertModel>(model);
 
             var jsonModel = JsonConvert.SerializeObject(advertApiModel);
-            var response = await _client.PostAsync(_client.BaseAddress, new StringContent(jsonModel)).ConfigureAwait(false);
+            var response = await _client.PostAsync(new Uri($"{_client.BaseAddress}/create"), new StringContent(jsonModel)).ConfigureAwait(false);
             var responseJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var createAdvertResponse = JsonConvert.DeserializeObject<CreateAdvertResponse>(responseJson);
 
             var advertResponse = _mapper.Map<AdvertResponse>(createAdvertResponse);
 
             return advertResponse;
+        }
+
+        public async Task<bool> Confirm(ConfirmAdvertRequest model)
+        {
+            var advertModel = _mapper.Map<ConfirmAdvertModel>(model);
+            var jsonModel = JsonConvert.SerializeObject(advertModel);
+            var response = await _client
+                .PutAsync(new Uri($"{_client.BaseAddress}/confirm"), new StringContent(jsonModel))
+                .ConfigureAwait(false);
+            return response.StatusCode == HttpStatusCode.OK;
         }
     }
 }

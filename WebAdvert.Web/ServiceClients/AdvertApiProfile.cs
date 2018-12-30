@@ -9,6 +9,7 @@ namespace WebAdvert.Web.ServiceClients
         {
             CreateMap<AdvertModel, CreateAdvertModel>().ReverseMap();
             CreateMap<CreateAdvertResponse, AdvertResponse>().ReverseMap();
+            CreateMap<ConfirmAdvertRequest, ConfirmAdvertModel>().ReverseMap();
         }
     }
 }
