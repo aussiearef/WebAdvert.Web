@@ -36,6 +36,8 @@ namespace WebAdvert.Web.Controllers
             if (ModelState.IsValid)
             {
                 var createAdvertModel = _mapper.Map<CreateAdvertModel>(model);
+                createAdvertModel.UserName = User.Identity.Name;
+
                 var apiCallResponse = await _advertApiClient.Create(createAdvertModel).ConfigureAwait(false);
                 var id = apiCallResponse.Id;
 
