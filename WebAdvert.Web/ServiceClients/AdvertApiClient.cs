@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using AdvertApi.Models;
 using AutoMapper;
@@ -19,9 +20,8 @@ namespace WebAdvert.Web.ServiceClients
             _client = client;
             _mapper = mapper;
 
-            var createUrl = configuration.GetSection("AdvertApi").GetValue<string>("CreateUrl");
+            var createUrl = configuration.GetSection("AdvertApi").GetValue<string>("BaseUrl");
             _client.BaseAddress = new Uri(createUrl);
-            _client.DefaultRequestHeaders.Add("Content-type", "application/json");
         }
 
         public async Task<AdvertResponse> Create(CreateAdvertModel model)
@@ -29,7 +29,8 @@ namespace WebAdvert.Web.ServiceClients
             var advertApiModel = _mapper.Map<AdvertModel>(model);
 
             var jsonModel = JsonConvert.SerializeObject(advertApiModel);
-            var response = await _client.PostAsync(new Uri($"{_client.BaseAddress}/create"), new StringContent(jsonModel)).ConfigureAwait(false);
+            var response = await _client.PostAsync(new Uri($"{_client.BaseAddress}/create"),
+                new StringContent(jsonModel, Encoding.UTF8, "application/json")).ConfigureAwait(false);
             var responseJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             var createAdvertResponse = JsonConvert.DeserializeObject<CreateAdvertResponse>(responseJson);
 
@@ -43,7 +44,8 @@ namespace WebAdvert.Web.ServiceClients
             var advertModel = _mapper.Map<ConfirmAdvertModel>(model);
             var jsonModel = JsonConvert.SerializeObject(advertModel);
             var response = await _client
-                .PutAsync(new Uri($"{_client.BaseAddress}/confirm"), new StringContent(jsonModel))
+                .PutAsync(new Uri($"{_client.BaseAddress}/confirm"),
+                    new StringContent(jsonModel, Encoding.UTF8, "application/json"))
                 .ConfigureAwait(false);
             return response.StatusCode == HttpStatusCode.OK;
         }
