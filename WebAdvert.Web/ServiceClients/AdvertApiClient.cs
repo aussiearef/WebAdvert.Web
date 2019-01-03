@@ -31,9 +31,7 @@ namespace WebAdvert.Web.ServiceClients
             var jsonModel = JsonConvert.SerializeObject(advertApiModel);
             var response = await _client.PostAsync(new Uri($"{_client.BaseAddress}/create"),
                 new StringContent(jsonModel, Encoding.UTF8, "application/json")).ConfigureAwait(false);
-            var responseJson = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            var createAdvertResponse = JsonConvert.DeserializeObject<CreateAdvertResponse>(responseJson);
-
+            var createAdvertResponse = await response.Content.ReadAsAsync<CreateAdvertResponse>().ConfigureAwait(false);
             var advertResponse = _mapper.Map<AdvertResponse>(createAdvertResponse);
 
             return advertResponse;

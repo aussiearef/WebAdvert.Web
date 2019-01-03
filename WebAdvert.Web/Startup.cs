@@ -58,6 +58,9 @@ namespace WebAdvert.Web
             services.AddTransient<IFileUploader, S3FileUploader>();
             services.AddHttpClient<IAdvertApiClient, AdvertApiClient>().AddPolicyHandler(GetRetryPolicy())
                 .AddPolicyHandler(GetCircuitBreakerPatternPolicy());
+
+            services.AddHttpClient<ISearchApiClient, SearchApiClient>().AddPolicyHandler(GetRetryPolicy())
+                .AddPolicyHandler(GetCircuitBreakerPatternPolicy());
         }
 
         private IAsyncPolicy<HttpResponseMessage> GetCircuitBreakerPatternPolicy()

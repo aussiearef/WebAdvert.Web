@@ -54,3 +54,10 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.searchBox {
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    border: 1px dashed #f69c55;
+}
