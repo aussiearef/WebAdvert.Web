@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -14,17 +15,23 @@ namespace WebAdvert.Web.Controllers
     {
         public ISearchApiClient SearchApiClient { get; }
         public IMapper Mapper { get; }
+        public IAdvertApiClient ApiClient { get; }
 
-        public HomeController(ISearchApiClient searchApiClient, IMapper mapper)
+        public HomeController(ISearchApiClient searchApiClient, IMapper mapper, IAdvertApiClient apiClient)
         {
             SearchApiClient = searchApiClient;
             Mapper = mapper;
+            ApiClient = apiClient;
         }
 
         [Authorize]
-        public IActionResult Index()
+        [ResponseCache(Duration = 60)]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var allAds = await ApiClient.GetAllAsync().ConfigureAwait(false);
+            var allViewModels = allAds.Select(x => Mapper.Map<IndexViewModel>(x));
+
+            return View(allViewModels);
         }
 
         [HttpPost]
@@ -47,5 +54,7 @@ namespace WebAdvert.Web.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }

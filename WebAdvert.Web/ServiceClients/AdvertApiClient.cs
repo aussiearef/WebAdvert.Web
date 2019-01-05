@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -24,7 +26,7 @@ namespace WebAdvert.Web.ServiceClients
             _client.BaseAddress = new Uri(createUrl);
         }
 
-        public async Task<AdvertResponse> Create(CreateAdvertModel model)
+        public async Task<AdvertResponse> CreateAsync(CreateAdvertModel model)
         {
             var advertApiModel = _mapper.Map<AdvertModel>(model);
 
@@ -37,7 +39,7 @@ namespace WebAdvert.Web.ServiceClients
             return advertResponse;
         }
 
-        public async Task<bool> Confirm(ConfirmAdvertRequest model)
+        public async Task<bool> ConfirmAsync(ConfirmAdvertRequest model)
         {
             var advertModel = _mapper.Map<ConfirmAdvertModel>(model);
             var jsonModel = JsonConvert.SerializeObject(advertModel);
@@ -46,6 +48,13 @@ namespace WebAdvert.Web.ServiceClients
                     new StringContent(jsonModel, Encoding.UTF8, "application/json"))
                 .ConfigureAwait(false);
             return response.StatusCode == HttpStatusCode.OK;
+        }
+
+        public async Task<List<Advertisement>> GetAllAsync()
+        {
+            var apiCallResponse = await _client.GetAsync(new Uri($"{_client.BaseAddress}/all")).ConfigureAwait(false);
+            var allAdvertModels = await apiCallResponse.Content.ReadAsAsync<List<AdvertModel>>().ConfigureAwait(false);
+            return allAdvertModels.Select(x => _mapper.Map<Advertisement>(x)).ToList();
         }
     }
 }

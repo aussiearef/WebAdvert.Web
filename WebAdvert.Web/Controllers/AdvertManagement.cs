@@ -38,7 +38,7 @@ namespace WebAdvert.Web.Controllers
                 var createAdvertModel = _mapper.Map<CreateAdvertModel>(model);
                 createAdvertModel.UserName = User.Identity.Name;
 
-                var apiCallResponse = await _advertApiClient.Create(createAdvertModel).ConfigureAwait(false);
+                var apiCallResponse = await _advertApiClient.CreateAsync(createAdvertModel).ConfigureAwait(false);
                 var id = apiCallResponse.Id;
 
                 bool isOkToConfirmAd = true;
@@ -68,7 +68,7 @@ namespace WebAdvert.Web.Controllers
                             FilePath = filePath,
                             Status = AdvertStatus.Pending
                         };
-                        await _advertApiClient.Confirm(confirmModel).ConfigureAwait(false);
+                        await _advertApiClient.ConfirmAsync(confirmModel).ConfigureAwait(false);
                         Console.WriteLine(e);
                     }
 
@@ -83,7 +83,7 @@ namespace WebAdvert.Web.Controllers
                         FilePath = filePath,
                         Status = AdvertStatus.Active
                     };
-                    await _advertApiClient.Confirm(confirmModel).ConfigureAwait(false);
+                    await _advertApiClient.ConfirmAsync(confirmModel).ConfigureAwait(false);
                 }
 
                 return RedirectToAction("Index", "Home");

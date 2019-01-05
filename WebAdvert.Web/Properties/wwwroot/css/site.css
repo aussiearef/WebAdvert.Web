@@ -61,3 +61,24 @@ body {
     text-align: center;
     border: 1px dashed #f69c55;
 }
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 30%;
+    margin-right: 20px;
+    margin-bottom: 5%;
+    height: 200px;
+    float:left;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.card img {
+    height: 200px;
+}

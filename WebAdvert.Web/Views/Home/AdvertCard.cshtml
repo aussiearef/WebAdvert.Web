@@ -1,0 +1,18 @@
+﻿@model WebAdvert.Web.Models.Home.IndexViewModel
+
+<div class="card">
+    <a href="@Model.Id">
+        @{
+            var defaultImageUrl = "https://camblycontent.files.wordpress.com/2017/02/advertising-word-block.jpg";
+            var imageUrl = string.IsNullOrEmpty(Model.Image) ? defaultImageUrl :
+                $"http://d194f954dege7m.cloudfront.net/{Model.Image}" ;
+        }
+        <img src="@imageUrl" alt="Avatar" style="width:100%">
+        <div class="container">
+            <p>@Model.Title</p>
+        </div>
+    </a>
+</div>
+        
+
+    

@@ -21,7 +21,7 @@ namespace WebAdvert.Web.ServiceClients
         public async Task<List<AdvertType>> Search(string keyword)
         {
             var result = new List<AdvertType>();
-            var callUrl = $"{BaseAddress}/search/v1/{keyword.ToLower()}";
+            var callUrl = $"{BaseAddress}/search/v1/{keyword}";
             var httpResponse = await _client.GetAsync(new Uri(callUrl)).ConfigureAwait(false);
 
             if (httpResponse.StatusCode == HttpStatusCode.OK)

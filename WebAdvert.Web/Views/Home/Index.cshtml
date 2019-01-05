@@ -1,24 +1,30 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<WebAdvert.Web.Models.Home.IndexViewModel>
 
-<div class="container">
-    <div class="row rounded border border-info pt-2 pb-2">
-        <div class="col-md-2 col-sm-4 text-left">
-            <span>Enter a keyword:</span>
-        </div>
-        <div class="col-md-8 col-sm-8 text-left">
-            <form method="post" asp-controller="Home" asp-action="Search">
-                <input type="text" 
-                       name="keyword" 
-                       id="keyword" 
-                       class="form-control float-left" 
-                       required 
-                       placeholder="Keyword"
-                       style="width: 80%; margin-right: 5px"/>
+<div class="row  pt-2 pb-2" id="Search">
+    <div class="col-md-2 col-sm-4 text-left">
+        <span>Enter a keyword:</span>
+    </div>
+    <div class="col-md-12 col-sm-8 text-left">
+        <form method="post" asp-controller="Home" asp-action="Search">
+            <input type="text"
+                   name="keyword"
+                   id="keyword"
+                   class="form-control float-left"
+                   required
+                   placeholder="Keyword"
+                   style="width: 80%; margin-right: 5px" />
 
-                <button type="submit"  class="btn-secondary" placeholder ="Keyword" required>Search</button>
-            </form>
-        </div>
+            <button type="submit" class="btn-secondary" placeholder="Keyword" required>Search</button>
+        </form>
+    </div>
+
+    <div class="col-md-12 mt-3">
+        @foreach (var viewModel in Model)
+        {
+            await Html.RenderPartialAsync("AdvertCard", viewModel);
+        }
     </div>
 </div>
