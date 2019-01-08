@@ -17,24 +17,36 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web Advertisements</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="https://image.flaticon.com/icons/png/128/1335/1335806.png" class="w-32"/> Web Advertisements
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            
+            @if (User.Identity.IsAuthenticated)
+            {
+              
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Brows Ads</a>
+                        <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="Home" asp-action="Index" >
+                            <img src="https://energypedia.info/images/thumb/9/9c/Icon_Browse_Biogas.svg/128px-Icon_Browse_Biogas.svg.png"
+                                 class="w-24"/>
+                            Brows Ads
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="AdvertManagement" asp-action="Create">Create</a>
+                        <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="AdvertManagement" asp-action="Create">
+                            <img src="https://vignette.wikia.nocookie.net/mixedmartialarts/images/3/37/Create_new_article_icon.png/revision/latest?cb=20100314153329"
+                                 class="w-24" />
+                            Create
+                        </a>
                     </li>
                 </ul>
             </div>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <div class="p-2 border-info">
+             <div class="p-2 border-info" style="font-family: 'Actor', sans-serif;">
                     Hello @User.Identity.Name
                 </div>
                 <div class="p-2 border-info ml-1">

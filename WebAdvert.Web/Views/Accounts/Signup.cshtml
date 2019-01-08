@@ -1,42 +1,50 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-@{
+﻿@{
     ViewData["Title"] = "Signup Page";
 }
 
 @model WebAdvert.Web.Models.Accounts.SignupModel;
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-lg-8 col-sm-4">
+            <form method="post" asp-controller="Accounts" asp-action="Signup">
+                <h5 class="alert alert-info">
+                    <img src="https://img.icons8.com/dusk/2x/sign-up.png" style="width: 32px;" />
+                    Create an account by entering your email address and a password
+                </h5>
 
-<div class="row" >
-    <div class="cold-md-4">
-        <form method="post" asp-controller="Accounts" asp-action="Signup">
-            <h4>Create a new account</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger" >
+                <div asp-validation-summary="All" class="text-danger" />
 
-            </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <button type="submit" class="btn btn-default">Signup</button>
-         </form>
-
+                <button type="submit" class="btn btn-default">Signup</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-2 box-shadow border-info rounded border " id="whySignup">
+        <div style="text-align:center" class="w-100">
+            <h2>Why Sign Up?</h2>
+        </div>
+        <p class="w-100">
+            If you sign up you will be able to advertise the items that you don not want and do not use!
+        </p>
+        <p>
+            Above all you will learn a lot about building Micro Services using the edge technologies as well as the latest .Net Core as well as Amazon Web Services capabilities.
+        </p>
     </div>
 </div>

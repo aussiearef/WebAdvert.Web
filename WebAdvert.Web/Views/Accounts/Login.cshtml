@@ -1,8 +1,11 @@
 ﻿@model WebAdvert.Web.Models.Accounts.LoginModel
 
 <div class="row">
-    <div class="col-md-6">
-        <h5 class="alert alert-info">Login using your email address and password</h5>
+    <div class="col-md-7">
+        <h5 class="alert alert-info">
+            <img src="http://www.icon100.com/up/2625/128/login.png" style="width: 32px;"/>
+            Login using your email address and password
+        </h5>
         <form method="post" asp-controller="Accounts" asp-action="Login">
             <div class="form-group">
                 <label asp-for="Email"></label>
