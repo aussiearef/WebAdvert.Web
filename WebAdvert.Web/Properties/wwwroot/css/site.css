@@ -119,10 +119,19 @@ body {
     font-size: x-large;
 }
 
-#whySignup{
+.advertDetailBox {
+    height:500px;
+}
+
+#whySignup {
     padding-top: 10px;
     font-size: large;
 }
 #whySignup {
     margin-bottom: 30px;
+}
+
+#detailImage {
+    height:300px;
+    width:auto;
 }

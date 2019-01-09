@@ -1,80 +1,90 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.Extensions.Configuration;
+@inject IConfiguration configuration
+
+@{
+    var advertImageUrl = configuration.GetValue<string>("ImageBaseUrl");
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebAdvert.Web</title>
 
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
           asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
           asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
           crossorigin="anonymous"
-          integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+          integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4="></script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="https://image.flaticon.com/icons/png/128/1335/1335806.png" class="w-32"/> Web Advertisements
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            @if (User.Identity.IsAuthenticated)
-            {
-              
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="Home" asp-action="Index" >
-                            <img src="https://energypedia.info/images/thumb/9/9c/Icon_Browse_Biogas.svg/128px-Icon_Browse_Biogas.svg.png"
-                                 class="w-24"/>
-                            Brows Ads
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="AdvertManagement" asp-action="Create">
-                            <img src="https://vignette.wikia.nocookie.net/mixedmartialarts/images/3/37/Create_new_article_icon.png/revision/latest?cb=20100314153329"
-                                 class="w-24" />
-                            Create
-                        </a>
-                    </li>
-                </ul>
+    <input type="hidden" value="@advertImageUrl" id="hidImagesBaseUrl" />
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="https://image.flaticon.com/icons/png/128/1335/1335806.png" class="w-32" /> Web Advertisements
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="Home" asp-action="Index">
+                                    <img src="https://energypedia.info/images/thumb/9/9c/Icon_Browse_Biogas.svg/128px-Icon_Browse_Biogas.svg.png"
+                                         class="w-24" />
+                                    Brows Ads
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark nav-button-border" asp-area="" asp-controller="AdvertManagement" asp-action="Create">
+                                    <img src="https://vignette.wikia.nocookie.net/mixedmartialarts/images/3/37/Create_new_article_icon.png/revision/latest?cb=20100314153329"
+                                         class="w-24" />
+                                    Create
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-2 border-info" style="font-family: 'Actor', sans-serif;">
+                        Hello @User.Identity.Name
+                    </div>
+                    <div class="p-2 border-info ml-1">
+                        <a asp-controller="Accounts" asp-action="Signout">Sign Out</a>
+                    </div>
+                }
             </div>
-             <div class="p-2 border-info" style="font-family: 'Actor', sans-serif;">
-                    Hello @User.Identity.Name
-                </div>
-                <div class="p-2 border-info ml-1">
-                    <a asp-controller="Accounts" asp-action="Signout">Sign Out</a>
-                </div>
-            }
-        </div>
-    </nav>
-</header>
-<div class="container" >
+        </nav>
+    </header>
+    <div class="container">
         <main role="main">
             @RenderBody()
         </main>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-        asp-fallback-test="window.jQuery"
-        crossorigin="anonymous"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-    crossorigin="anonymous"
-        integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
+    
+    
     @RenderSection("Scripts", required: false)
 </body>
 </html>
