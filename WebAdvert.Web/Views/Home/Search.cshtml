@@ -3,13 +3,15 @@
 
 <div class="row">
     <div class="col-md-10">
-        @foreach(var item in Model)
-        { 
+        @foreach (var item in Model)
+        {
             <div class="border rounded border-info p-1 w-100">
                 <img src="http://www.iconninja.com/files/180/701/315/search-results-icon.png"
-                     style="width: 24px;height: 24px;"/>
-                <a class="btn-link" href="@item.Id"> @item.Title</a>
+                     style="width: 24px;height: 24px;" />
+                <a class="btn-link" href="#" data-id="@item.Id"> @item.Title</a>
             </div>
         }
     </div>
 </div>
+
+@Html.Partial("AdvertDetail");
