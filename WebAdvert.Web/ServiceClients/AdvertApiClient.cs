@@ -14,6 +14,7 @@ namespace WebAdvert.Web.ServiceClients
 {
     public class AdvertApiClient : IAdvertApiClient
     {
+        private readonly string _baseAddress;
         private readonly HttpClient _client;
         private readonly IMapper _mapper;
 
@@ -22,8 +23,7 @@ namespace WebAdvert.Web.ServiceClients
             _client = client;
             _mapper = mapper;
 
-            var createUrl = configuration.GetSection("AdvertApi").GetValue<string>("BaseUrl");
-            _client.BaseAddress = new Uri(createUrl);
+            _baseAddress = configuration.GetSection("AdvertApi").GetValue<string>("BaseUrl");
         }
 
         public async Task<AdvertResponse> CreateAsync(CreateAdvertModel model)
@@ -31,7 +31,7 @@ namespace WebAdvert.Web.ServiceClients
             var advertApiModel = _mapper.Map<AdvertModel>(model);
 
             var jsonModel = JsonConvert.SerializeObject(advertApiModel);
-            var response = await _client.PostAsync(new Uri($"{_client.BaseAddress}/create"),
+            var response = await _client.PostAsync(new Uri($"{_baseAddress}/create"),
                 new StringContent(jsonModel, Encoding.UTF8, "application/json")).ConfigureAwait(false);
             var createAdvertResponse = await response.Content.ReadAsAsync<CreateAdvertResponse>().ConfigureAwait(false);
             var advertResponse = _mapper.Map<AdvertResponse>(createAdvertResponse);
@@ -44,7 +44,7 @@ namespace WebAdvert.Web.ServiceClients
             var advertModel = _mapper.Map<ConfirmAdvertModel>(model);
             var jsonModel = JsonConvert.SerializeObject(advertModel);
             var response = await _client
-                .PutAsync(new Uri($"{_client.BaseAddress}/confirm"),
+                .PutAsync(new Uri($"{_baseAddress}/confirm"),
                     new StringContent(jsonModel, Encoding.UTF8, "application/json"))
                 .ConfigureAwait(false);
             return response.StatusCode == HttpStatusCode.OK;
@@ -52,14 +52,14 @@ namespace WebAdvert.Web.ServiceClients
 
         public async Task<List<Advertisement>> GetAllAsync()
         {
-            var apiCallResponse = await _client.GetAsync(new Uri($"{_client.BaseAddress}/all")).ConfigureAwait(false);
+            var apiCallResponse = await _client.GetAsync(new Uri($"{_baseAddress}/all")).ConfigureAwait(false);
             var allAdvertModels = await apiCallResponse.Content.ReadAsAsync<List<AdvertModel>>().ConfigureAwait(false);
             return allAdvertModels.Select(x => _mapper.Map<Advertisement>(x)).ToList();
         }
 
         public async Task<Advertisement> GetAsync(string advertId)
         {
-            var apiCallResponse = await _client.GetAsync(new Uri($"{_client.BaseAddress}/{advertId}")).ConfigureAwait(false);
+            var apiCallResponse = await _client.GetAsync(new Uri($"{_baseAddress}/{advertId}")).ConfigureAwait(false);
             var fullAdvert = await apiCallResponse.Content.ReadAsAsync<AdvertModel>().ConfigureAwait(false);
             return _mapper.Map<Advertisement>(fullAdvert);
         }

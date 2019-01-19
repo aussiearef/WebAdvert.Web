@@ -56,12 +56,13 @@
     <PackageReference Include="Amazon.Extensions.CognitoAuthentication" Version="1.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.8" />
+    <PackageReference Include="AWSSDK.ServiceDiscovery" Version="3.3.3.11" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0-preview.18572.1" />
     <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="3.0.0-preview.18572.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="appsettings.json">
+    <Content Update="Views\Shared\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
