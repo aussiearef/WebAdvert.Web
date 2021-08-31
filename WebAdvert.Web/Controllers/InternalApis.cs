@@ -21,7 +21,15 @@ namespace WebAdvert.Web.Controllers
 
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<IActionResult> GetAsync(string id)
+        public async Task<IActionResult> GetAsyncDefault(string id)
+        {
+            var record = await _advertApiClient.GetAsync(id).ConfigureAwait(false);
+            return Json(record);
+        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public async Task<IActionResult> GetAsync2(string id)
         {
             var record = await _advertApiClient.GetAsync(id).ConfigureAwait(false);
             return Json(record);

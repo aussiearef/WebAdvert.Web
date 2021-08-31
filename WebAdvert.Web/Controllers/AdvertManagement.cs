@@ -75,16 +75,16 @@ namespace WebAdvert.Web.Controllers
 
                 }
 
-                if (isOkToConfirmAd)
-                {
-                    var confirmModel = new ConfirmAdvertRequest()
-                    {
-                        Id = id,
-                        FilePath = filePath,
-                        Status = AdvertStatus.Active
-                    };
-                    await _advertApiClient.ConfirmAsync(confirmModel).ConfigureAwait(false);
-                }
+                //if (isOkToConfirmAd)
+                //{
+                //    var confirmModel = new ConfirmAdvertRequest()
+                //    {
+                //        Id = id,
+                //        FilePath = filePath,
+                //        Status = AdvertStatus.Active
+                //    };
+                //    await _advertApiClient.ConfirmAsync(confirmModel).ConfigureAwait(false);
+                //}
 
                 return RedirectToAction("Index", "Home");
             }
